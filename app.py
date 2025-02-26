@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
 
+
 # Function to load Lottie animations
 def load_lottieurl(url):
     r = requests.get(url)
