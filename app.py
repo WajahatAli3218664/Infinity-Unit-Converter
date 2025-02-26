@@ -217,6 +217,6 @@ else:
 # Footer
 st.markdown("---")
 st.markdown("""
-**Made by Wajahat Ali💜✨**  
+**Made by Wajahat💜✨**  
 Using [Streamlit](https://streamlit.io/) for an amazing user experience.
 """)
