@@ -107,7 +107,7 @@ st.markdown("<h1>🌌 Infinity Unit Converter✨</h1>", unsafe_allow_html=True)
 st_lottie(lottie_heading, height=200, key="heading_animation")
 st.markdown("""
 Welcome to the **Infinity Unit Converter**! Convert between different units of length, weight, and temperature with ease.
-This app is designed and developed by **Wajahat **🌌❤️.
+This app is designed and developed by **Wajahat Ali **🌌❤️.
 """)
 
 # Add Lottie animation
