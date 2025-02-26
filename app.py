@@ -1,6 +1,6 @@
-import streamlit as st
-from streamlit_lottie import st_lottie
-import requests
+import streamlit as st # type: ignore
+from streamlit_lottie import st_lottie # type: ignore
+import requests # type: ignore
 
 # Function to load Lottie animations
 def load_lottieurl(url):
