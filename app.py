@@ -2,7 +2,6 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
 
-
 # Function to load Lottie animations
 def load_lottieurl(url):
     r = requests.get(url)
@@ -38,7 +37,7 @@ st.markdown("""
     .stMarkdown h1 {
         color: var(--heading-color);
         text-align: center;
-        animation: fadeIn 2s ease-in-out;
+        animation: bounce 2s infinite, fadeIn 2s ease-in-out, scale 3s infinite;
         font-family: 'Arial', sans-serif;
         font-size: 2.5rem;
         margin-bottom: 20px;
@@ -99,6 +98,28 @@ st.markdown("""
     @keyframes slideIn {
         from { transform: translateX(-100%); }
         to { transform: translateX(0); }
+    }
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-20px);
+        }
+        60% {
+            transform: translateY(-10px);
+        }
+    }
+    @keyframes scale {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+        }
     }
 </style>
 """, unsafe_allow_html=True)
