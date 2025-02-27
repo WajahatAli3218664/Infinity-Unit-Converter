@@ -43,7 +43,7 @@ st.markdown("""
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .stButton>button:hover {
-        background-color: #4CAF50;  /* Green on hover */
+        background-color: #013220;  /* Green on hover */
         transform: scale(1.08);
     }
     .golden-title {
