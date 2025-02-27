@@ -33,6 +33,7 @@ requests>=2.32.3
 rich>=13.9.4
 streamlit>=1.42.1
 streamlit-lottie>=0.0.5
+streamlit-authenticator>=0.2.0
 tenacity>=9.0.0
 toml>=0.10.2
 tornado>=6.4.2
