@@ -16,15 +16,89 @@ lottie_heading = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_2
 # Custom CSS for both light and dark themes
 st.markdown("""
 <style>
-    .stApp { background-color: var(--background-color); color: var(--text-color); }
-    .stButton>button { background-color: #8A2BE2; color: white; border-radius: 5px; padding: 10px 20px; font-size: 16px; border: none; transition: 0.3s ease; }
-    .stButton>button:hover { background-color: #7B1FA2; transform: scale(1.05); }
-    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 { color: var(--heading-color); text-align: center; animation: fadeIn 2s ease-in-out; font-family: 'Arial', sans-serif; }
-    .stSelectbox select, .stNumberInput input { background-color: var(--input-background); color: var(--text-color); border: 1px solid #8A2BE2; }
-    .stSidebar { background-color: var(--sidebar-background); color: var(--text-color); }
-    [data-theme="light"] { --background-color: #ffffff; --text-color: #000000; --heading-color: #8A2BE2; --input-background: #f0f2f6; --sidebar-background: #3f3f3f; }
-    [data-theme="dark"] { --background-color: #0e1117; --text-color: #ffffff; --heading-color: #8A2BE2; --input-background: #1e1e1e; --sidebar-background: #3f3f3f; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    /* General styles */
+    .stApp {
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+    .stButton>button {
+        background-color: #8A2BE2; /* Purple color */
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .stButton>button:hover {
+        background-color: #7B1FA2; /* Darker purple on hover */
+        transform: scale(1.05);
+    }
+    .stMarkdown h1 {
+        color: var(--heading-color);
+        text-align: center;
+        animation: fadeIn 2s ease-in-out;
+        font-family: 'Arial', sans-serif;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    .stMarkdown h2 {
+        color: var(--heading-color);
+        animation: slideIn 1s ease-in-out;
+    }
+    .stMarkdown h3 {
+        color: var(--heading-color);
+        animation: fadeIn 1.5s ease-in-out;
+    }
+    .stSelectbox>div>div>select {
+        background-color: var(--input-background);
+        color: var(--text-color);
+        border: 1px solid #8A2BE2; /* Purple border */
+    }
+    .stNumberInput>div>div>input {
+        background-color: var(--input-background);
+        color: var(--text-color);
+        border: 1px solid #8A2BE2; /* Purple border */
+    }
+    .stSuccess {
+        background-color: #8A2BE2; /* Purple background */
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        animation: fadeIn 1s ease-in-out;
+    }
+    .stSidebar {
+        background-color: #3f3f3f; /* Grey sidebar */
+        color: var(--text-color);
+    }
+
+    /* Light theme variables */
+    [data-theme="light"] {
+        --background-color: #ffffff;
+        --text-color: #000000;
+        --heading-color: #8A2BE2; /* Purple heading */
+        --input-background: #f0f2f6;
+        --sidebar-background: #3f3f3f; /* Grey sidebar */
+    }
+
+    /* Dark theme variables */
+    [data-theme="dark"] {
+        --background-color: #0e1117;
+        --text-color: #ffffff;
+        --heading-color: #8A2BE2; /* Purple heading */
+        --input-background: #1e1e1e;
+        --sidebar-background: #3f3f3f; /* Grey sidebar */
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes slideIn {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(0); }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -36,21 +110,16 @@ Welcome to the **Infinity Unit Converter**! Convert between different units of l
 This app is designed and developed by Wajahat Ali🌌❤️.
 """)
 
-# Sidebar for Settings
+# Add Lottie animation
+st_lottie(lottie_animation, height=300, key="unit_converter")
+
+# Sidebar for unit selection
 st.sidebar.header("⚙️ Settings")
 unit_type = st.sidebar.selectbox("Select Unit Type", ["Length", "Weight", "Temperature"])
-theme = st.sidebar.radio("Choose Theme", ["Light", "Dark"])
 
-# Unit Conversion History
+# New Feature: Unit History
 if "history" not in st.session_state:
     st.session_state.history = []
-
-if st.sidebar.button("Clear History"):
-    st.session_state.history = []
-
-st.sidebar.subheader("📜 Conversion History")
-for item in st.session_state.history[-5:]:
-    st.sidebar.text(item)
 
 # Conversion logic
 if unit_type == "Length":
@@ -63,6 +132,7 @@ if unit_type == "Length":
         to_unit = st.selectbox("To", length_units)
     value = st.number_input("Enter value", min_value=0.0, format="%.2f")
 
+    # Conversion factors
     length_conversion_factors = {
         "Meters": 1,
         "Kilometers": 0.001,
@@ -73,9 +143,8 @@ if unit_type == "Length":
 
     if st.button("Convert"):
         converted_value = value * (length_conversion_factors[to_unit] / length_conversion_factors[from_unit])
-        result = f"✅ **{value} {from_unit} = {converted_value:.2f} {to_unit}**"
-        st.session_state.history.append(result)
-        st.success(result)
+        st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
+        st.success(f"✅ **{value} {from_unit} = {converted_value:.2f} {to_unit}**")
 
 # Footer
 st.markdown("---")
