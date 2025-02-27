@@ -42,9 +42,10 @@ st.markdown("""
         border: none;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
-    .stButton>button:hover {
+  .stButton>button:hover {
         background-color: #013220;  /* Green on hover */
         transform: scale(1.08);
+        color: white !important;  /* Ensure text color remains white on hover */
     }
     .golden-title {
         font-size: 3rem;
