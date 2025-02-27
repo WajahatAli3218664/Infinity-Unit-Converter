@@ -113,13 +113,20 @@ This app is designed and developed by Wajahat Ali🌌❤️.
 # Add Lottie animation
 st_lottie(lottie_animation, height=300, key="unit_converter")
 
-# Sidebar for unit selection
+# Sidebar for unit selection and history
 st.sidebar.header("⚙️ Settings")
 unit_type = st.sidebar.selectbox("Select Unit Type", ["Length", "Weight", "Temperature"])
 
-# New Feature: Unit History
+# Conversion history in the sidebar
+st.sidebar.header("📜 Conversion History")
 if "history" not in st.session_state:
     st.session_state.history = []
+
+if st.sidebar.button("Clear History"):
+    st.session_state.history = []
+
+for entry in st.session_state.history:
+    st.sidebar.write(entry)
 
 # Conversion logic
 if unit_type == "Length":
