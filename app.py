@@ -61,7 +61,7 @@ st.markdown("""
         border: 1px solid #8A2BE2; /* Purple border */
     }
     .stSuccess {
-        background-color: #8A2BE2; /* Purple background */
+        background: linear-gradient(135deg, #FF6F61, #8A2BE2); /* Gradient from pink to purple */
         color: white;
         padding: 10px;
         border-radius: 5px;
