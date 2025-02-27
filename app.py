@@ -34,25 +34,41 @@ st.markdown("""
         color: white;
     }
     .stButton>button {
-        background-color: #8A2BE2;
+        background-color: #ff9800;
         color: white;
-        border-radius: 5px;
+        border-radius: 8px;
         padding: 10px 20px;
         font-size: 16px;
         border: none;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .stButton>button:hover {
-        background-color: #7B1FA2;
-        transform: scale(1.05);
+        background-color: #e65100;
+        transform: scale(1.08);
     }
     .golden-title {
-        color: gold;
+        background: linear-gradient(90deg, #FFD700, #FFA500);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         text-align: center;
         font-family: 'Arial', sans-serif;
-        font-size: 2.5rem;
+        font-size: 3rem;
+        font-weight: bold;
         margin-bottom: 20px;
         animation: fadeIn 2s ease-in-out;
+    }
+    .stSidebar .stButton>button {
+        background-color: #6a1b9a;
+        color: white;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 14px;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .stSidebar .stButton>button:hover {
+        background-color: #4a148c;
+        transform: scale(1.05);
     }
     @keyframes fadeIn {
         from { opacity: 0; }
@@ -127,31 +143,5 @@ if unit_type == "Length":
         st.session_state.total_conversions += 1
         st.success(f"✅ {value} {from_unit} = {converted_value:.2f} {to_unit}")
 
-elif unit_type == "Weight":
-    st.header("⚖️ Weight Converter")
-    st.session_state.most_active_category = "Weight"
-    weight_units = ["Kilograms", "Grams", "Pounds", "Ounces"]
-    from_unit = st.selectbox("From", weight_units)
-    to_unit = st.selectbox("To", weight_units)
-    value = st.number_input("Enter value", min_value=0.0, format="%.2f")
-    weight_conversion_factors = {"Kilograms": 1, "Grams": 1000, "Pounds": 2.20462, "Ounces": 35.274}
-    if st.button("Convert"):
-        converted_value = value * (weight_conversion_factors[to_unit] / weight_conversion_factors[from_unit])
-        st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
-        st.session_state.total_conversions += 1
-        st.success(f"✅ {value} {from_unit} = {converted_value:.2f} {to_unit}")
-
-elif unit_type == "Temperature":
-    st.header("🌡️ Temperature Converter")
-    st.session_state.most_active_category = "Temperature"
-    temp_units = ["Celsius", "Fahrenheit", "Kelvin"]
-    from_unit = st.selectbox("From", temp_units)
-    to_unit = st.selectbox("To", temp_units)
-    value = st.number_input("Enter value", format="%.2f")
-    if st.button("Convert"):
-        converted_value = value
-        st.session_state.total_conversions += 1
-        st.success(f"✅ {value} {from_unit} = {converted_value:.2f} {to_unit}")
-
 st.markdown("---")
-st.markdown("**Made by Wajahat💜✨**")               
+st.markdown("**Made by Wajahat💜✨**")
