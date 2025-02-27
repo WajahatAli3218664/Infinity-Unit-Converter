@@ -45,7 +45,6 @@ st.markdown("""
     .stButton>button:hover {
         background-color: #013220;  /* Green on hover */
         transform: scale(1.08);
-        color: white !important;  /* Ensure text color remains white on hover */
     }
     .golden-title {
         font-size: 3rem;
@@ -71,7 +70,6 @@ st.markdown("""
     .stSidebar .stButton>button:hover {
         background-color: #4a148c;
         transform: scale(1.05);
-        color: white !important;  /* Ensure text color remains white on hover */
     }
     @keyframes fadeIn {
         from { opacity: 0; }
@@ -142,6 +140,53 @@ if unit_type == "Length":
     length_conversion_factors = {"Meters": 1, "Kilometers": 0.001, "Feet": 3.28084, "Inches": 39.3701, "Miles": 0.000621371}
     if st.button("Convert"):
         converted_value = value * (length_conversion_factors[to_unit] / length_conversion_factors[from_unit])
+        st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
+        st.session_state.total_conversions += 1
+        st.success(f"✅ {value} {from_unit} = {converted_value:.2f} {to_unit}")
+
+elif unit_type == "Weight":
+    st.header("⚖️ Weight Converter")
+    st.session_state.most_active_category = "Weight"
+    weight_units = ["Kilograms", "Grams", "Pounds", "Ounces"]
+    from_unit = st.selectbox("From", weight_units)
+    to_unit = st.selectbox("To", weight_units)
+    value = st.number_input("Enter value", min_value=0.0, format="%.2f")
+    weight_conversion_factors = {"Kilograms": 1, "Grams": 1000, "Pounds": 2.20462, "Ounces": 35.274}
+    if st.button("Convert"):
+        converted_value = value * (weight_conversion_factors[to_unit] / weight_conversion_factors[from_unit])
+        st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
+        st.session_state.total_conversions += 1
+        st.success(f"✅ {value} {from_unit} = {converted_value:.2f} {to_unit}")
+
+elif unit_type == "Temperature":
+    st.header("🌡️ Temperature Converter")
+    st.session_state.most_active_category = "Temperature"
+    temperature_units = ["Celsius", "Fahrenheit", "Kelvin"]
+    from_unit = st.selectbox("From", temperature_units)
+    to_unit = st.selectbox("To", temperature_units)
+    value = st.number_input("Enter value", format="%.2f")
+    if st.button("Convert"):
+        if from_unit == "Celsius":
+            if to_unit == "Fahrenheit":
+                converted_value = (value * 9/5) + 32
+            elif to_unit == "Kelvin":
+                converted_value = value + 273.15
+            else:
+                converted_value = value
+        elif from_unit == "Fahrenheit":
+            if to_unit == "Celsius":
+                converted_value = (value - 32) * 5/9
+            elif to_unit == "Kelvin":
+                converted_value = (value - 32) * 5/9 + 273.15
+            else:
+                converted_value = value
+        elif from_unit == "Kelvin":
+            if to_unit == "Celsius":
+                converted_value = value - 273.15
+            elif to_unit == "Fahrenheit":
+                converted_value = (value - 273.15) * 9/5 + 32
+            else:
+                converted_value = value
         st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
         st.session_state.total_conversions += 1
         st.success(f"✅ {value} {from_unit} = {converted_value:.2f} {to_unit}")
