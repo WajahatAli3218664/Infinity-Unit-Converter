@@ -29,13 +29,11 @@ if "session_start" not in st.session_state:
 # Custom CSS for styling
 st.markdown("""
 <style>
+    /* General styles for both themes */
     .stApp {
-        background-color: #0e1117;
-        color: white;
+        font-family: 'Arial', sans-serif;
     }
     .stButton>button {
-        background-color: #ff9800;
-        color: white;
         border-radius: 8px;
         padding: 10px 20px;
         font-size: 16px;
@@ -43,15 +41,12 @@ st.markdown("""
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .stButton>button:hover {
-        background-color: #013220;  /* Green on hover */
         transform: scale(1.08);
-        color: white !important;  /* Ensure text color remains white on hover */
     }
     .golden-title {
         font-size: 3rem;
         font-weight: bold;
         text-align: center;
-        font-family: 'Arial', sans-serif;
         animation: fadeIn 2s ease-in-out;
     }
     .golden-title span {
@@ -59,44 +54,74 @@ st.markdown("""
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-    .stSidebar .stButton>button {
-        background-color: #6a1b9a;
-        color: white;
-        border-radius: 8px;
-        padding: 10px 15px;
-        font-size: 14px;
-        border: none;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    .stSidebar .stButton>button:hover {
-        background-color: #4a148c;
-        transform: scale(1.05);
-    }
     .footer {
-        background-color: #1f2937;
         padding: 20px;
         border-radius: 10px;
         text-align: center;
         margin-top: 40px;
-        font-family: 'Arial', sans-serif;
     }
     .footer p {
         margin: 0;
         font-size: 1.1rem;
-        color: #f3f4f6;
     }
     .footer .quote {
         font-style: italic;
-        color: #9ca3af;
         margin-bottom: 10px;
     }
     .footer .signature {
         font-weight: bold;
-        color: #ff9800;
     }
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
+    }
+
+    /* Light theme */
+    [data-theme="light"] {
+        background-color: #ffffff;
+        color: #000000;
+    }
+    [data-theme="light"] .stButton>button {
+        background-color: #ff9800;
+        color: white;
+    }
+    [data-theme="light"] .stButton>button:hover {
+        background-color: #013220;
+        color: white;
+    }
+    [data-theme="light"] .footer {
+        background-color: #f3f4f6;
+        color: #000000;
+    }
+    [data-theme="light"] .footer .quote {
+        color: #6b7280;
+    }
+    [data-theme="light"] .footer .signature {
+        color: #ff9800;
+    }
+
+    /* Dark theme */
+    [data-theme="dark"] {
+        background-color: #0e1117;
+        color: white;
+    }
+    [data-theme="dark"] .stButton>button {
+        background-color: #ff9800;
+        color: white;
+    }
+    [data-theme="dark"] .stButton>button:hover {
+        background-color: #013220;
+        color: white;
+    }
+    [data-theme="dark"] .footer {
+        background-color: #1f2937;
+        color: #f3f4f6;
+    }
+    [data-theme="dark"] .footer .quote {
+        color: #9ca3af;
+    }
+    [data-theme="dark"] .footer .signature {
+        color: #ff9800;
     }
 </style>
 """, unsafe_allow_html=True)
