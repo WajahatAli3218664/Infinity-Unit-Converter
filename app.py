@@ -67,9 +67,38 @@ st.markdown("""
         border-radius: 5px;
         animation: fadeIn 1s ease-in-out;
     }
+
+    /* Sidebar styles */
     .stSidebar {
         background-color: var(--sidebar-background);
         color: var(--text-color);
+        padding: 10px;
+    }
+    .stSidebar .stMarkdown {
+        font-size: 16px;
+    }
+    .stSidebar .stMarkdown h1, .stSidebar .stMarkdown h2, .stSidebar .stMarkdown h3 {
+        color: var(--heading-color);
+    }
+
+    /* Mobile-specific styles */
+    @media (max-width: 768px) {
+        .stSidebar {
+            width: 100% !important; /* Full width on mobile */
+            padding: 10px;
+        }
+        .stSidebar .stMarkdown {
+            font-size: 14px; /* Smaller font size for mobile */
+        }
+        .stSidebar .stMarkdown h1 {
+            font-size: 1.5rem; /* Smaller heading size for mobile */
+        }
+        .stSidebar .stMarkdown h2 {
+            font-size: 1.25rem; /* Smaller heading size for mobile */
+        }
+        .stSidebar .stMarkdown h3 {
+            font-size: 1rem; /* Smaller heading size for mobile */
+        }
     }
 
     /* Light theme variables */
