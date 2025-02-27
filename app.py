@@ -91,6 +91,7 @@ st.markdown("""
             padding: 15px;
             border-radius: 0; /* Remove border radius for full-width mobile view */
             box-shadow: none; /* Remove shadow for full-width mobile view */
+            margin-bottom: 20px; /* Add space below the sidebar */
         }
         .stSidebar .stMarkdown {
             font-size: 14px; /* Smaller font size for mobile */
@@ -103,6 +104,10 @@ st.markdown("""
         }
         .stSidebar .stMarkdown h3 {
             font-size: 1rem; /* Smaller heading size for mobile */
+        }
+        /* Prevent overlap with main content */
+        .stApp > div:first-child {
+            padding-top: 20px; /* Add padding to the top of the main content */
         }
     }
 
@@ -200,4 +205,79 @@ if unit_type == "Length":
     if st.button("Convert"):
         converted_value = value * (length_conversion_factors[to_unit] / length_conversion_factors[from_unit])
         st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
-        st.success(f"✅ **{
+        st.success(f"✅ **{value} {from_unit} = {converted_value:.2f} {to_unit}**")
+
+elif unit_type == "Weight":
+    st.header("⚖️ Weight Converter")
+    weight_units = ["Grams", "Kilograms", "Pounds", "Ounces"]
+    col1, col2 = st.columns(2)
+    with col1:
+        from_unit = st.selectbox("From", weight_units)
+    with col2:
+        to_unit = st.selectbox("To", weight_units)
+    value = st.number_input("Enter value", min_value=0.0, format="%.2f")
+
+    # Conversion factors
+    weight_conversion_factors = {
+        "Grams": 1,
+        "Kilograms": 0.001,
+        "Pounds": 0.00220462,
+        "Ounces": 0.035274
+    }
+
+    if st.button("Convert"):
+        converted_value = value * (weight_conversion_factors[to_unit] / weight_conversion_factors[from_unit])
+        st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
+        st.success(f"✅ **{value} {from_unit} = {converted_value:.2f} {to_unit}**")
+
+elif unit_type == "Temperature":
+    st.header("🌡️ Temperature Converter")
+    temp_units = ["Celsius", "Fahrenheit", "Kelvin"]
+    col1, col2 = st.columns(2)
+    with col1:
+        from_unit = st.selectbox("From", temp_units)
+    with col2:
+        to_unit = st.selectbox("To", temp_units)
+    value = st.number_input("Enter value", min_value=-273.15, format="%.2f")
+
+    # Conversion logic
+    if from_unit == "Celsius":
+        if to_unit == "Fahrenheit":
+            converted_value = (value * 9/5) + 32
+        elif to_unit == "Kelvin":
+            converted_value = value + 273.15
+        else:
+            converted_value = value
+    elif from_unit == "Fahrenheit":
+        if to_unit == "Celsius":
+            converted_value = (value - 32) * 5/9
+        elif to_unit == "Kelvin":
+            converted_value = (value - 32) * 5/9 + 273.15
+        else:
+            converted_value = value
+    elif from_unit == "Kelvin":
+        if to_unit == "Celsius":
+            converted_value = value - 273.15
+        elif to_unit == "Fahrenheit":
+            converted_value = (value - 273.15) * 9/5 + 32
+        else:
+            converted_value = value
+
+    if st.button("Convert"):
+        st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
+        st.success(f"✅ **{value} {from_unit} = {converted_value:.2f} {to_unit}**")
+
+# New Feature: Display Conversion History
+st.sidebar.header("📜 Conversion History")
+if st.session_state.history:
+    for entry in st.session_state.history:
+        st.sidebar.write(entry)
+else:
+    st.sidebar.write("No conversions yet.")
+
+# Footer
+st.markdown("---")
+st.markdown("""
+**Made by Wajahat Ali💜✨**  
+Using [Streamlit](https://streamlit.io/) for an amazing user experience.
+""")
