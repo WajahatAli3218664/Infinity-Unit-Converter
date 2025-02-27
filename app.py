@@ -42,7 +42,7 @@ st.markdown("""
         border: none;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
-  .stButton>button:hover {
+    .stButton>button:hover {
         background-color: #013220;  /* Green on hover */
         transform: scale(1.08);
         color: white !important;  /* Ensure text color remains white on hover */
@@ -71,6 +71,28 @@ st.markdown("""
     .stSidebar .stButton>button:hover {
         background-color: #4a148c;
         transform: scale(1.05);
+    }
+    .footer {
+        background-color: #1f2937;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 40px;
+        font-family: 'Arial', sans-serif;
+    }
+    .footer p {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #f3f4f6;
+    }
+    .footer .quote {
+        font-style: italic;
+        color: #9ca3af;
+        margin-bottom: 10px;
+    }
+    .footer .signature {
+        font-weight: bold;
+        color: #ff9800;
     }
     @keyframes fadeIn {
         from { opacity: 0; }
@@ -192,5 +214,10 @@ elif unit_type == "Temperature":
         st.session_state.total_conversions += 1
         st.success(f"✅ {value} {from_unit} = {converted_value:.2f} {to_unit}")
 
-st.markdown("---")
-st.markdown("**Made by Wajahat💜✨**")
+# Footer Section
+st.markdown("""
+<div class="footer">
+    <p class="quote">"The only limit to our realization of tomorrow is our doubts of today."</p>
+    <p class="signature">Designed by Wajahat Ali</p>
+</div>
+""", unsafe_allow_html=True)
