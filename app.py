@@ -134,15 +134,45 @@ st.markdown("""
         color: white;
     }
 
-    /* Main conversion button */
-    .stButton>button.convert-button {
-        background-color: #4B0082; /* Indigo */
-        color: white;
-        font-weight: bold;
+    /* Main conversion button - UPDATED STYLING */
+    /* Using !important to override other styles */
+    button[kind="primary"] {
+        background-color: #4B0082 !important; /* Indigo base color */
+        color: white !important;
+        font-weight: bold !important;
+        font-size: 18px !important;
+        padding: 12px 24px !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+        border: 2px solid #4B0082 !important;
     }
-    .stButton>button.convert-button:hover {
-        background-color: #00FFFF; /* Cyan on hover */
-        color: black;
+    
+    button[kind="primary"]:hover {
+        background-color: #00FFFF !important; /* Cyan on hover */
+        color: #000000 !important;
+        border-color: #00FFFF !important;
+    }
+    
+    /* Make the button stand out with a subtle glow effect */
+    button[kind="primary"] {
+        position: relative !important;
+    }
+    
+    button[kind="primary"]::after {
+        content: "" !important;
+        position: absolute !important;
+        top: -4px !important;
+        left: -4px !important;
+        right: -4px !important;
+        bottom: -4px !important;
+        border-radius: 12px !important;
+        background: linear-gradient(45deg, #4B0082, #00FFFF) !important;
+        z-index: -1 !important;
+        opacity: 0.3 !important;
+        transition: opacity 0.3s ease !important;
+    }
+    
+    button[kind="primary"]:hover::after {
+        opacity: 0.6 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -207,7 +237,7 @@ if unit_type == "Length":
     to_unit = st.selectbox("To", length_units)
     value = st.number_input("Enter value", min_value=0.0, format="%.2f")
     length_conversion_factors = {"Meters": 1, "Kilometers": 0.001, "Feet": 3.28084, "Inches": 39.3701, "Miles": 0.000621371}
-    if st.button("Convert", key="length_convert", help="Convert length units"):
+    if st.button("Convert", type="primary"):
         converted_value = value * (length_conversion_factors[to_unit] / length_conversion_factors[from_unit])
         st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
         st.session_state.total_conversions += 1
@@ -221,7 +251,7 @@ elif unit_type == "Weight":
     to_unit = st.selectbox("To", weight_units)
     value = st.number_input("Enter value", min_value=0.0, format="%.2f")
     weight_conversion_factors = {"Kilograms": 1, "Grams": 1000, "Pounds": 2.20462, "Ounces": 35.274}
-    if st.button("Convert", key="weight_convert", help="Convert weight units"):
+    if st.button("Convert", type="primary"):
         converted_value = value * (weight_conversion_factors[to_unit] / weight_conversion_factors[from_unit])
         st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
         st.session_state.total_conversions += 1
@@ -234,7 +264,7 @@ elif unit_type == "Temperature":
     from_unit = st.selectbox("From", temperature_units)
     to_unit = st.selectbox("To", temperature_units)
     value = st.number_input("Enter value", format="%.2f")
-    if st.button("Convert", key="temp_convert", help="Convert temperature units"):
+    if st.button("Convert", type="primary"):
         if from_unit == "Celsius":
             if to_unit == "Fahrenheit":
                 converted_value = (value * 9/5) + 32
