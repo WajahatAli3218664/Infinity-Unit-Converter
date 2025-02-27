@@ -67,9 +67,48 @@ st.markdown("""
         border-radius: 5px;
         animation: fadeIn 1s ease-in-out;
     }
+
+    /* Sidebar styles */
     .stSidebar {
-        background-color: #3f3f3f; /* Grey sidebar */
-        color: var(--text-color);
+        background-color: #2c3e50; /* Dark blue sidebar */
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .stSidebar .stMarkdown {
+        font-size: 16px;
+        color: white;
+    }
+    .stSidebar .stMarkdown h1, .stSidebar .stMarkdown h2, .stSidebar .stMarkdown h3 {
+        color: white;
+    }
+
+    /* Mobile-specific styles */
+    @media (max-width: 768px) {
+        .stSidebar {
+            width: 100% !important; /* Full width on mobile */
+            padding: 15px;
+            border-radius: 0; /* Remove border radius for full-width mobile view */
+            box-shadow: none; /* Remove shadow for full-width mobile view */
+            margin-bottom: 20px; /* Add space below the sidebar */
+        }
+        .stSidebar .stMarkdown {
+            font-size: 14px; /* Smaller font size for mobile */
+        }
+        .stSidebar .stMarkdown h1 {
+            font-size: 1.5rem; /* Smaller heading size for mobile */
+        }
+        .stSidebar .stMarkdown h2 {
+            font-size: 1.25rem; /* Smaller heading size for mobile */
+        }
+        .stSidebar .stMarkdown h3 {
+            font-size: 1rem; /* Smaller heading size for mobile */
+        }
+        /* Prevent overlap with main content */
+        .stApp > div:first-child {
+            padding-top: 20px; /* Add padding to the top of the main content */
+        }
     }
 
     /* Light theme variables */
@@ -78,7 +117,7 @@ st.markdown("""
         --text-color: #000000;
         --heading-color: #8A2BE2; /* Purple heading */
         --input-background: #f0f2f6;
-        --sidebar-background: #3f3f3f; /* Grey sidebar */
+        --sidebar-background: #2c3e50; /* Dark blue sidebar */
     }
 
     /* Dark theme variables */
@@ -87,7 +126,7 @@ st.markdown("""
         --text-color: #ffffff;
         --heading-color: #8A2BE2; /* Purple heading */
         --input-background: #1e1e1e;
-        --sidebar-background: #3f3f3f; /* Grey sidebar */
+        --sidebar-background: #2c3e50; /* Dark blue sidebar */
     }
 
     /* Animations */
@@ -113,8 +152,24 @@ This app is designed and developed by Wajahat Ali🌌❤️.
 # Add Lottie animation
 st_lottie(lottie_animation, height=300, key="unit_converter")
 
-# Sidebar for unit selection
+# Sidebar for unit selection and additional features
 st.sidebar.header("⚙️ Settings")
+st.sidebar.markdown("### Personalize Your Experience")
+user_name = st.sidebar.text_input("Enter your name:", placeholder="John Doe")
+
+st.sidebar.markdown("### Choose Conversion Type")
+conversion_type = st.sidebar.radio(
+    "Select the type of conversion:",
+    ["Unit Converter", "Currency Converter"]
+)
+
+st.sidebar.markdown("### Unit Conversion Features")
+st.sidebar.markdown("""
+- **Accurate Results:** Reliable and precise conversions.
+- **Fast & Easy:** Instant results at your fingertips.
+- **Wide Range:** From length to electricity, we’ve got it all!
+""")
+
 unit_type = st.sidebar.selectbox("Select Unit Type", ["Length", "Weight", "Temperature"])
 
 # New Feature: Unit History
