@@ -83,23 +83,50 @@ st.markdown("""
         margin: 0 10px;
     }
     
+    /* Updated Footer Styling */
     .footer {
         padding: 20px;
         border-radius: 10px;
         text-align: center;
         margin-top: 40px;
+        background: linear-gradient(135deg, #1A237E 0%, #311B92 50%, #0D47A1 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
     }
+    
+    .footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        opacity: 0.7;
+    }
+    
     .footer p {
         margin: 0;
         font-size: 1.1rem;
+        position: relative;
+        z-index: 1;
     }
+    
     .footer .quote {
         font-style: italic;
         margin-bottom: 10px;
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
+    
     .footer .signature {
         font-weight: bold;
+        color: #FFC107;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
+    
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
@@ -119,14 +146,8 @@ st.markdown("""
         color: white;
     }
     [data-theme="light"] .footer {
-        background-color: #f3f4f6;
-        color: #000000;
-    }
-    [data-theme="light"] .footer .quote {
-        color: #6b7280;
-    }
-    [data-theme="light"] .footer .signature {
-        color: #ff9800;
+        background: linear-gradient(135deg, #1A237E 0%, #311B92 50%, #0D47A1 100%);
+        color: white;
     }
 
     /* Dark theme */
@@ -143,14 +164,8 @@ st.markdown("""
         color: white;
     }
     [data-theme="dark"] .footer {
-        background-color: #1f2937;
-        color: #f3f4f6;
-    }
-    [data-theme="dark"] .footer .quote {
-        color: #9ca3af;
-    }
-    [data-theme="dark"] .footer .signature {
-        color: #ff9800;
+        background: linear-gradient(135deg, #1A237E 0%, #311B92 50%, #0D47A1 100%);
+        color: white;
     }
 
     /* Sidebar buttons */
@@ -402,7 +417,7 @@ elif unit_type == "Temperature":
         st.session_state.total_conversions += 1
         st.success(f"✅ {value} {from_unit} = {converted_value:.2f} {to_unit}")
 
-# Footer Section - Slightly modified for mobile
+# Footer Section - Updated with enhanced styling
 st.markdown("""
 <div class="footer">
     <p class="quote">"The only limit to our realization of tomorrow is our doubts of today."</p>
