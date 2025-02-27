@@ -136,11 +136,12 @@ st.markdown("""
 
     /* Main conversion button */
     .stButton>button.convert-button {
-        background-color: #006400; /* Dark green */
+        background-color: #4B0082; /* Indigo */
         color: white;
+        font-weight: bold;
     }
     .stButton>button.convert-button:hover {
-        background-color: #FFFF00; /* Yellow on hover */
+        background-color: #00FFFF; /* Cyan on hover */
         color: black;
     }
 </style>
