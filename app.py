@@ -43,17 +43,46 @@ st.markdown("""
     .stButton>button:hover {
         transform: scale(1.08);
     }
+    
+    /* Updated Title Bar Styling */
     .golden-title {
         font-size: 3rem;
         font-weight: bold;
         text-align: center;
-        animation: fadeIn 2s ease-in-out;
+        margin-bottom: 1rem;
+        padding: 15px;
+        border-radius: 12px;
+        background: linear-gradient(120deg, #1A237E, #311B92, #0D47A1);
+        color: white;
+        animation: shimmer 3s infinite;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
+    
     .golden-title span {
-        background: linear-gradient(90deg, #FFD700, #FFA500);
+        background: linear-gradient(90deg, #FFC107, #FFEB3B, #FFC107);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+    
+    @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+    
+    .title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1rem;
+    }
+    
+    .title-icon {
+        font-size: 2.5rem;
+        margin: 0 10px;
+    }
+    
     .footer {
         padding: 20px;
         border-radius: 10px;
@@ -177,8 +206,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Title and Introduction
-st.markdown("""<h1 class='golden-title'>🌌 <span>Infinity Unit Converter</span> ✨</h1>""", unsafe_allow_html=True)
+# Title and Introduction - UPDATED TITLE STYLING
+st.markdown("""<div class="golden-title">🌌 <span>Infinity Unit Converter</span> ✨</div>""", unsafe_allow_html=True)
 st_lottie(lottie_heading, height=200, key="heading_animation")
 
 st.markdown("""
