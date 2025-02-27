@@ -195,3 +195,9 @@ if unit_type == "Length":
         "Feet": 3.28084,
         "Inches": 39.3701,
         "Miles": 0.000621371
+    }
+
+    if st.button("Convert"):
+        converted_value = value * (length_conversion_factors[to_unit] / length_conversion_factors[from_unit])
+        st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
+        st.success(f"✅ **{
