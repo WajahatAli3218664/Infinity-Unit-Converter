@@ -26,7 +26,7 @@ if "feedback_count" not in st.session_state:
 if "session_start" not in st.session_state:
     st.session_state.session_start = time.time()
 
-# Custom CSS for styling
+# Custom CSS for styling with added mobile responsiveness
 st.markdown("""
 <style>
     /* General styles for both themes */
@@ -203,19 +203,84 @@ st.markdown("""
     button[kind="primary"]:hover::after {
         opacity: 0.6 !important;
     }
+    
+    /* MOBILE RESPONSIVE STYLES */
+    /* Media queries for different screen sizes */
+    @media (max-width: 768px) {
+        .golden-title {
+            font-size: 2rem !important;
+            padding: 10px !important;
+            margin-bottom: 0.5rem !important;
+            line-height: 1.2 !important;
+        }
+        
+        /* Make the lottie animations smaller on mobile */
+        div.element-container:has(> div.stLottie) {
+            max-height: 150px !important;
+            overflow: hidden !important;
+        }
+        
+        .footer {
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .footer p {
+            font-size: 0.9rem;
+        }
+        
+        /* Adjust button sizes on mobile */
+        .stButton>button {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        
+        button[kind="primary"] {
+            font-size: 16px !important;
+            padding: 10px 20px !important;
+        }
+    }
+    
+    /* Extra small screens */
+    @media (max-width: 480px) {
+        .golden-title {
+            font-size: 1.5rem !important;
+            padding: 8px !important;
+            display: inline-block !important;
+            width: 100% !important;
+        }
+        
+        /* Smaller lottie for very small screens */
+        div.element-container:has(> div.stLottie) {
+            max-height: 120px !important;
+        }
+        
+        /* More compact layout for xs screens */
+        .stSelectbox {
+            margin-bottom: 0.5rem;
+        }
+        
+        .stNumberInput {
+            margin-bottom: 0.5rem;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # Title and Introduction - UPDATED TITLE STYLING
+# Modified for better mobile display
 st.markdown("""<div class="golden-title">🌌 <span>Infinity Unit Converter</span> ✨</div>""", unsafe_allow_html=True)
-st_lottie(lottie_heading, height=200, key="heading_animation")
+
+# Added height parameter for dynamic sizing based on CSS media queries
+st_lottie(lottie_heading, height=180, key="heading_animation")
 
 st.markdown("""
 Welcome to the **Infinity Unit Converter**! Convert between different units of length, weight, and temperature with ease.
 This app is designed and developed by Wajahat Ali🌌❤️.
 """)
 
-st_lottie(lottie_animation, height=300, key="unit_converter")
+# Reduced animation height for better mobile experience
+st_lottie(lottie_animation, height=250, key="unit_converter")
 
 # Sidebar Sections
 st.sidebar.header("🌟 Pro Tips")
@@ -262,8 +327,14 @@ if unit_type == "Length":
     st.header("📏 Length Converter")
     st.session_state.most_active_category = "Length"
     length_units = ["Meters", "Kilometers", "Feet", "Inches", "Miles"]
-    from_unit = st.selectbox("From", length_units)
-    to_unit = st.selectbox("To", length_units)
+    
+    # Use columns for a more compact mobile layout
+    col1, col2 = st.columns(2)
+    with col1:
+        from_unit = st.selectbox("From", length_units)
+    with col2:
+        to_unit = st.selectbox("To", length_units)
+        
     value = st.number_input("Enter value", min_value=0.0, format="%.2f")
     length_conversion_factors = {"Meters": 1, "Kilometers": 0.001, "Feet": 3.28084, "Inches": 39.3701, "Miles": 0.000621371}
     if st.button("Convert", type="primary"):
@@ -276,8 +347,14 @@ elif unit_type == "Weight":
     st.header("⚖️ Weight Converter")
     st.session_state.most_active_category = "Weight"
     weight_units = ["Kilograms", "Grams", "Pounds", "Ounces"]
-    from_unit = st.selectbox("From", weight_units)
-    to_unit = st.selectbox("To", weight_units)
+    
+    # Use columns for a more compact mobile layout
+    col1, col2 = st.columns(2)
+    with col1:
+        from_unit = st.selectbox("From", weight_units)
+    with col2:
+        to_unit = st.selectbox("To", weight_units)
+        
     value = st.number_input("Enter value", min_value=0.0, format="%.2f")
     weight_conversion_factors = {"Kilograms": 1, "Grams": 1000, "Pounds": 2.20462, "Ounces": 35.274}
     if st.button("Convert", type="primary"):
@@ -290,8 +367,14 @@ elif unit_type == "Temperature":
     st.header("🌡️ Temperature Converter")
     st.session_state.most_active_category = "Temperature"
     temperature_units = ["Celsius", "Fahrenheit", "Kelvin"]
-    from_unit = st.selectbox("From", temperature_units)
-    to_unit = st.selectbox("To", temperature_units)
+    
+    # Use columns for a more compact mobile layout
+    col1, col2 = st.columns(2)
+    with col1:
+        from_unit = st.selectbox("From", temperature_units)
+    with col2:
+        to_unit = st.selectbox("To", temperature_units)
+        
     value = st.number_input("Enter value", format="%.2f")
     if st.button("Convert", type="primary"):
         if from_unit == "Celsius":
@@ -319,7 +402,7 @@ elif unit_type == "Temperature":
         st.session_state.total_conversions += 1
         st.success(f"✅ {value} {from_unit} = {converted_value:.2f} {to_unit}")
 
-# Footer Section
+# Footer Section - Slightly modified for mobile
 st.markdown("""
 <div class="footer">
     <p class="quote">"The only limit to our realization of tomorrow is our doubts of today."</p>
