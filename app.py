@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 from streamlit_lottie import st_lottie
 import requests
 import time
@@ -43,19 +43,20 @@ st.markdown("""
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .stButton>button:hover {
-        background-color: #e65100;
+        background-color: #4CAF50;  /* Green on hover */
         transform: scale(1.08);
     }
     .golden-title {
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        animation: fadeIn 2s ease-in-out;
+    }
+    .golden-title span {
         background: linear-gradient(90deg, #FFD700, #FFA500);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-align: center;
-        font-family: 'Arial', sans-serif;
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 20px;
-        animation: fadeIn 2s ease-in-out;
     }
     .stSidebar .stButton>button {
         background-color: #6a1b9a;
@@ -78,7 +79,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Title and Introduction
-st.markdown("""<h1 class='golden-title'>🌌 Infinity Unit Converter✨</h1>""", unsafe_allow_html=True)
+st.markdown("""<h1 class='golden-title'>🌌 <span>Infinity Unit Converter</span> ✨</h1>""", unsafe_allow_html=True)
 st_lottie(lottie_heading, height=200, key="heading_animation")
 
 st.markdown("""
