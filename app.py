@@ -123,6 +123,26 @@ st.markdown("""
     [data-theme="dark"] .footer .signature {
         color: #ff9800;
     }
+
+    /* Sidebar buttons */
+    .stSidebar .stButton>button {
+        background-color: #800080; /* Purple */
+        color: white;
+    }
+    .stSidebar .stButton>button:hover {
+        background-color: #4B0082; /* Darker purple on hover */
+        color: white;
+    }
+
+    /* Main conversion button */
+    .stButton>button.convert-button {
+        background-color: #006400; /* Dark green */
+        color: white;
+    }
+    .stButton>button.convert-button:hover {
+        background-color: #FFFF00; /* Yellow on hover */
+        color: black;
+    }
 </style>
 """, unsafe_allow_html=True)
 
