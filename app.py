@@ -207,7 +207,7 @@ if unit_type == "Length":
     to_unit = st.selectbox("To", length_units)
     value = st.number_input("Enter value", min_value=0.0, format="%.2f")
     length_conversion_factors = {"Meters": 1, "Kilometers": 0.001, "Feet": 3.28084, "Inches": 39.3701, "Miles": 0.000621371}
-    if st.button("Convert"):
+    if st.button("Convert", key="length_convert", help="Convert length units"):
         converted_value = value * (length_conversion_factors[to_unit] / length_conversion_factors[from_unit])
         st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
         st.session_state.total_conversions += 1
@@ -221,7 +221,7 @@ elif unit_type == "Weight":
     to_unit = st.selectbox("To", weight_units)
     value = st.number_input("Enter value", min_value=0.0, format="%.2f")
     weight_conversion_factors = {"Kilograms": 1, "Grams": 1000, "Pounds": 2.20462, "Ounces": 35.274}
-    if st.button("Convert"):
+    if st.button("Convert", key="weight_convert", help="Convert weight units"):
         converted_value = value * (weight_conversion_factors[to_unit] / weight_conversion_factors[from_unit])
         st.session_state.history.append(f"{value} {from_unit} = {converted_value:.2f} {to_unit}")
         st.session_state.total_conversions += 1
@@ -234,7 +234,7 @@ elif unit_type == "Temperature":
     from_unit = st.selectbox("From", temperature_units)
     to_unit = st.selectbox("To", temperature_units)
     value = st.number_input("Enter value", format="%.2f")
-    if st.button("Convert"):
+    if st.button("Convert", key="temp_convert", help="Convert temperature units"):
         if from_unit == "Celsius":
             if to_unit == "Fahrenheit":
                 converted_value = (value * 9/5) + 32
@@ -265,5 +265,5 @@ st.markdown("""
 <div class="footer">
     <p class="quote">"The only limit to our realization of tomorrow is our doubts of today."</p>
     <p class="signature">Designed by Wajahat Ali</p>
-</div>
+</div>   
 """, unsafe_allow_html=True)
