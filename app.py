@@ -72,10 +72,13 @@ st.markdown("""
     .stSidebar {
         background-color: var(--sidebar-background);
         color: var(--text-color);
-        padding: 10px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .stSidebar .stMarkdown {
         font-size: 16px;
+        color: var(--text-color);
     }
     .stSidebar .stMarkdown h1, .stSidebar .stMarkdown h2, .stSidebar .stMarkdown h3 {
         color: var(--heading-color);
@@ -85,7 +88,9 @@ st.markdown("""
     @media (max-width: 768px) {
         .stSidebar {
             width: 100% !important; /* Full width on mobile */
-            padding: 10px;
+            padding: 15px;
+            border-radius: 0; /* Remove border radius for full-width mobile view */
+            box-shadow: none; /* Remove shadow for full-width mobile view */
         }
         .stSidebar .stMarkdown {
             font-size: 14px; /* Smaller font size for mobile */
